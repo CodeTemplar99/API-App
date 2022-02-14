@@ -2,6 +2,7 @@
 
 import 'package:corefans_test/screens/home/components/deliveryForm.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 SizedBox buildDropLocation(context) {
   Size size = MediaQuery.of(context).size;
