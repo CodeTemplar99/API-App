@@ -24,19 +24,28 @@ class _DeliveryFormState extends State<DeliveryForm> {
         key: _formKey,
         child: Column(
           children: [
-            TextFormField(
-              controller: c.country,
-              keyboardType: TextInputType.name,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                fillColor: Colors.grey.shade100,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(8),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: c.country,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(8),
+                          bottomRight: Radius.circular(8),
+                        ),
+                      ),
+                      hintText: 'Nigeria',
+                    ),
+                  ),
                 ),
-                hintText: 'Nigeria',
-              ),
+              ],
             ),
             SizedBox(
               height: 25,
@@ -125,12 +134,25 @@ class _DeliveryFormState extends State<DeliveryForm> {
                 onPressed: c.isUpdating.value
                     ? null
                     : () async {
-                        await c.updatePlace();
+                        if (c.selected.value == null) {
+                          await c.createPlace();
+                        } else {
+                          await c.updatePlace();
+                        }
                         Navigator.pop(context);
                         c.fetchPlaces();
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              "${c.selected.value == null ? 'Created' : 'Updated'} successfully ✅"),
+                          duration: Duration(milliseconds: 1000),
+                        ));
                       },
                 child: Text(
-                  c.isUpdating.value ? 'Updating' : 'Proceed',
+                  c.isUpdating.value
+                      ? c.selected.value == null
+                          ? 'Creating'
+                          : 'Updating'
+                      : 'Proceed',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),

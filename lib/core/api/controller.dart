@@ -30,6 +30,38 @@ class UpdateController extends GetxController {
     state.value = place.state;
   }
 
+  void reset(Place place) {
+    selected.value = null;
+    country.clear();
+    amount.clear();
+    state.value = place.state;
+  }
+
+  Future<Place> createPlace() async {
+    isUpdating.value = true;
+    Place place = Place(
+      amount: double.tryParse(amount.text),
+      country: country.text,
+      state: state.value ?? 'unknown state',
+      id: null,
+    );
+
+    final response = await http.post(
+        Uri.parse('https://corefans.co/api/location/'),
+        body: place.toJson());
+
+    if (response.statusCode == 200) {
+      Map res = convert.jsonDecode(response.body);
+      Place place = Place.fromJson(res['data']);
+
+      isUpdating.value = false;
+      return place;
+    } else {
+      isUpdating.value = false;
+      throw Exception('failed to get places');
+    }
+  }
+
   Future<Place> updatePlace() async {
     isUpdating.value = true;
     Place place = selected.value!;
