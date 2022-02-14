@@ -4,7 +4,6 @@ import 'package:corefans_test/core/api/controller.dart';
 import 'package:corefans_test/core/models/location.dart';
 import 'package:corefans_test/screens/home/components/app_bar.dart';
 import 'package:corefans_test/screens/home/components/drop_location.dart';
-import 'package:corefans_test/screens/home/components/floating_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -95,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                 ],
               ),
-        floatingActionButton: FloatingButton(),
       ),
     );
   }
