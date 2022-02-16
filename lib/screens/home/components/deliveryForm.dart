@@ -1,6 +1,7 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:corefans_test/core/api/controller.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:get/get.dart';
@@ -27,21 +28,21 @@ class _DeliveryFormState extends State<DeliveryForm> {
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
-                    controller: c.country,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                        ),
-                      ),
-                      hintText: 'Nigeria',
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        border:
+                            Border.all(width: 0.3, color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: CountryCodePicker(
+                      onChanged: (value) => c.country.text = value.name!,
+                      // controller: c.country,
+                      initialSelection: 'NG',
+                      showCountryOnly: true,
+                      showOnlyCountryWhenClosed: true,
+                      alignLeft: true,
+                      dialogSize: Size(340, 350),
                     ),
                   ),
                 ),

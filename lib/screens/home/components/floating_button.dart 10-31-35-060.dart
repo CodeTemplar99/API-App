@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:corefans_test/core/api/controller.dart';
+import 'package:corefans_test/screens/home/components/country.dart';
 import 'package:corefans_test/screens/home/components/drop_location.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,12 @@ class FloatingButton extends StatelessWidget {
     // Size size = MediaQuery.of(context).size;
     return FloatingActionButton(
       onPressed: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => Country(),
+        //   ),
+        // );
         c.reset;
         showModalBottomSheet(
           context: context,

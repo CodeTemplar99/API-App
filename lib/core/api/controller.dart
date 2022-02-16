@@ -30,11 +30,11 @@ class UpdateController extends GetxController {
     state.value = place.state;
   }
 
-  void reset(Place place) {
+  void reset() {
     selected.value = null;
     country.clear();
     amount.clear();
-    state.value = place.state;
+    state.value = '';
   }
 
   Future<Place> createPlace() async {
@@ -45,7 +45,6 @@ class UpdateController extends GetxController {
       state: state.value ?? 'unknown state',
       id: null,
     );
-
     final response = await http.post(
         Uri.parse('https://corefans.co/api/location/'),
         body: place.toJson());
